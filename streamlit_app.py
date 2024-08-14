@@ -12,12 +12,11 @@ st.write(name_on_smoothie)
 
 cnx=st.connection("snowflake")
 session = cnx.session()
-my_dataframe = session.table("smoothies.public.fruit_options").select(col("FRUIT_NAME"))
+my_dataframe = session.table("smoothies.public.fruit_options").select(col("FRUIT_NAME","SEARCH_ON"))
 # st.dataframe(data=my_dataframe, use_container_width=True)
 
 ingredients_list = st.multiselect("select up to 5 ingredients",my_dataframe,max_selections=5)
 # temp part
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 # fv_df = st.dataframe(data=fruityvice_response.json(),use_container_width = True )
 # end of temp part
 if ingredients_list:
