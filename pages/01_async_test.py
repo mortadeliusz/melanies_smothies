@@ -30,7 +30,7 @@ async def submit_order(ingredients:str,name_on_smoothie:str):
 ingredients_list = st.multiselect("select up to 5 ingredients",my_dataframe,max_selections=5)
 
 @st.fragment
-async def submit():
+async def submit_order():
     if ingredients_list:
         ingredients_string = ",".join(fruit for fruit in ingredients_list) 
         st.write(f'Ingredients str: #{ingredients_string}')      
@@ -38,3 +38,5 @@ async def submit():
         if time_to_insert:
             await submit_order(ingredients_string,name_on_smoothie)
             st.success(f'Your Smoothie is ordered, {name_on_smoothie}!', icon="✅")
+
+submit_order()
