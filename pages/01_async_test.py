@@ -24,7 +24,7 @@ pd_df=my_dataframe.to_pandas()
 
 async def submit_order(ingredients:str,name_on_smoothie:str):
     my_insert_stmt = f"""insert into smoothies.public.orders(ingredients,name_on_order)
-                        values ('{ingredients_string}','{name_on_smoothie}')"""
+                        values ('{ingredients}','{name_on_smoothie}')"""
     await session.sql(my_insert_stmt).collect()
         
 ingredients_list = st.multiselect("select up to 5 ingredients",my_dataframe,max_selections=5)
