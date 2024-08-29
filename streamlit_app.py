@@ -7,7 +7,6 @@ import pandas as pd
 # Write directly to the app
 st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
 st.header(":blue[Choose the fruits you want in your custom smoothie.]")
-st.write("# EEEELOOOOOO")
     
 name_on_smoothie=st.text_input("Name on smoothie.")
 st.write(name_on_smoothie)
