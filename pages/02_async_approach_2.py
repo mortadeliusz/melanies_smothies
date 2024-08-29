@@ -1,6 +1,7 @@
 import streamlit as st
 import asyncio
 from snowflake.snowpark.functions import col
+import time
 
 cnx=st.connection("snowflake")
 session = cnx.session()
@@ -11,7 +12,7 @@ async def fake_fetch_data(sleeptime:int = 5):
     return "this is not really data - but here you go"
 
 async def submit_order(ingredients: str, name_on_smoothie:str):
-    await asyncio.sleep(60)
+    time.sleep(60)
     my_insert_stmt = f"""insert into smoothies.public.orders(ingredients,name_on_order)
                     values ('{ingredients}','{name_on_smoothie}')"""
     session.sql(my_insert_stmt).collect()
