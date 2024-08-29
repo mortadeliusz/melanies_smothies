@@ -11,7 +11,7 @@ async def fake_fetch_data(sleeptime:int = 5):
     await asyncio.sleep(sleeptime)
     return "this is not really data - but here you go"
 
-async def submit_order(ingredients: str, name_on_smoothie:str):
+async def submit_order_delayed(ingredients: str, name_on_smoothie:str):
     time.sleep(60)
     my_insert_stmt = f"""insert into smoothies.public.orders(ingredients,name_on_order)
                     values ('{ingredients}','{name_on_smoothie}')"""
@@ -25,5 +25,5 @@ if ingredients_list:
     time_to_insert=st.button("Submit Order")
     if time_to_insert:
         with st.spinner("creating order..."):
-            asyncio.run(submit_order(ingredients_string,name_on_smoothie))
+            asyncio.run(submit_order_delayed(ingredients_string,name_on_smoothie))
             st.success(f'Your Smoothie is ordered, {name_on_smoothie}!', icon="✅")
