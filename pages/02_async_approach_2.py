@@ -1,6 +1,9 @@
 import streamlit as st
 import asyncio
 
+cnx=st.connection("snowflake")
+session = cnx.session()
+
 async def fake_fetch_data(sleeptime:int = 5):
     await asyncio.sleep(sleeptime)
     return "this is not really data - but here you go"
@@ -8,8 +11,7 @@ async def fake_fetch_data(sleeptime:int = 5):
 async def main():
     ingredients ='mango, jerry'
     name_on_smoothie="macias"
-    cnx=st.connection("snowflake")
-    session = cnx.session()
+
     st.write("# This is an async page")
     with st.spinner("creating order..."):
         await fake_fetch_data()
@@ -19,5 +21,4 @@ async def main():
         st.success("The order should be right there now.")
         
 
-if __name__ == '__main__':
-    asyncio.run(main())
+asyncio.run(main())
