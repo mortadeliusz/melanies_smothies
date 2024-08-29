@@ -22,7 +22,7 @@ pd_df=my_dataframe.to_pandas()
 # st.stop()
 
 
-async def submit_order(ingredients:str,name_on_smoothie:str):
+def submit_order(ingredients:str,name_on_smoothie:str):
     my_insert_stmt = f"""insert into smoothies.public.orders(ingredients,name_on_order)
                         values ('{ingredients}','{name_on_smoothie}')"""
     session.sql(my_insert_stmt).collect()
