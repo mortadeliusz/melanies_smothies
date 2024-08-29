@@ -25,17 +25,15 @@ pd_df=my_dataframe.to_pandas()
 async def submit_order(ingredients:str,name_on_smoothie:str):
     my_insert_stmt = f"""insert into smoothies.public.orders(ingredients,name_on_order)
                         values ('{ingredients}','{name_on_smoothie}')"""
-    await session.sql(my_insert_stmt).collect()
+    session.sql(my_insert_stmt).collect()
         
 ingredients_list = st.multiselect("select up to 5 ingredients",my_dataframe,max_selections=5)
 
-async def submit_order():
-    if ingredients_list:
-        ingredients_string = ",".join(fruit for fruit in ingredients_list) 
-        st.write(f'Ingredients str: #{ingredients_string}')      
-        time_to_insert=st.button("Submit Order")
-        if time_to_insert:
-            await submit_order(ingredients_string,name_on_smoothie)
-            st.success(f'Your Smoothie is ordered, {name_on_smoothie}!', icon="✅")
 
-submit_order()
+if ingredients_list:
+    ingredients_string = ",".join(fruit for fruit in ingredients_list) 
+    st.write(f'Ingredients str: #{ingredients_string}')      
+    time_to_insert=st.button("Submit Order")
+    if time_to_insert:
+        submit_order(ingredients_string,name_on_smoothie)
+        st.success(f'Your Smoothie is ordered, {name_on_smoothie}!', icon="✅")
